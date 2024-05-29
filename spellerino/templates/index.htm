@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Spells</title>
+</head>
+
+<body>
+    <h1>D&D Spells</h1>
+
+    <form action="/search" method="POST">
+        <input type="text" name="search" placeholder="Search for a spell">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if search_term %}
+    {% if not_found %}
+    <p>No spells found for: {{ search_term }}</p>
+    {% else %}
+    <p>Search results for: {{ search_term }}</p>
+    <ul>
+        {% for spell in spells %}
+        <li><a href="{{ url_for('spell_details', index=spell['index']) }}">{{ spell['name'] }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
+</body>
+
+</html>
